@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Paragraf Animasyonları Kütüphanesi</title>
+    <meta name="description" content="Web projeleriniz için modern, estetik ve premium CSS paragraf animasyonları ve kaynak kodları.">
+    <!-- Google Fonts: Inter & Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Modern CSS Reset & Tasarım Sistemi */
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --card-hover-border: rgba(99, 102, 241, 0.4);
+            --text-primary: #f3f4f6;
+            --text-secondary: #9ca3af;
+            --accent-primary: #6366f1; /* Indigo */
+            --accent-secondary: #ec4899; /* Pink */
+            --code-bg: #151c2c;
+            --success-color: #10b981;
+            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            min-height: 100vh;
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(236, 72, 153, 0.08) 0%, transparent 40%);
+            background-attachment: fixed;
+        }
+
+        header {
+            text-align: center;
+            padding: 5rem 2rem 3rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        header h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #a5b4fc 0%, #6366f1 50%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        header p {
+            color: var(--text-secondary);
+            font-size: 1.25rem;
+            font-weight: 300;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem 5rem;
+        }
+
+        /* Grid Sistemi */
+        .animation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+
+        /* Glassmorphic Kart Tasarımı */
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 2rem;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: var(--transition-smooth);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+            opacity: 0;
+            transition: var(--transition-smooth);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--card-hover-border);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.1);
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card-header {
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .btn-restart {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-primary);
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-restart:hover {
+            background: var(--accent-primary);
+            border-color: var(--accent-primary);
+            transform: scale(1.05);
+        }
+
+        /* Canlı Gösterim Alanı */
+        .demo-area {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            padding: 2.5rem 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 120px;
+            text-align: center;
+        }
+
+        .demo-text {
+            font-size: 1.1rem;
+            color: #ffffff;
+            font-weight: 400;
+        }
+
+        /* Kod Gösterim Paneli */
+        .code-container {
+            position: relative;
+            background: var(--code-bg);
+            border-radius: 10px;
+            padding: 1.25rem;
+            margin-top: auto;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .code-block {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.85rem;
+            color: #cbd5e1;
+            white-space: pre-wrap;
+            overflow-x: auto;
+            max-height: 180px;
+            overflow-y: auto;
+        }
+
+        .btn-copy {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background: rgba(255, 255, 255, 0.08);
+            border: none;
+            color: var(--text-secondary);
+            padding: 0.35rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .btn-copy:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+        }
+
+        .btn-copy.copied {
+            background: var(--success-color);
+            color: #ffffff;
+        }
+
+        /* ------------------------------------------------------------------
+           ANIMASYON TANIMLAMALARI (CSS KEYFRAMES & SINIFLARI)
+        ------------------------------------------------------------------ */
+
+        /* 1. Fade Up (Aşağıdan Süzülerek Gelme) */
+        .anim-fade-up {
+            opacity: 0;
+            animation: fadeUp 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 2. Typing Effect (Daktilo Efekti) */
+        .anim-typing {
+            display: inline-block;
+            overflow: hidden;
+            border-right: 3px solid var(--accent-secondary);
+            white-space: nowrap;
+            width: 0;
+            animation: 
+                typing 3s steps(30, end) forwards,
+                blink-caret 0.75s step-end infinite;
+        }
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--accent-secondary) }
+        }
+
+        /* 3. Gradient Wave (Hareketli Renk Geçişi) */
+        .anim-gradient {
+            background: linear-gradient(120deg, #ff007f, #7f00ff, #00f0ff, #ff007f);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientMove 4s ease infinite;
+            font-weight: 600;
+        }
+        @keyframes gradientMove {
+            0% { background-position: 0% 50% }
+            50% { background-position: 100% 50% }
+            100% { background-position: 0% 50% }
+        }
+
+        /* 4. Glow Pulse (Işıma Efekti) */
+        .anim-glow {
+            animation: glowPulse 2s ease-in-out infinite alternate;
+        }
+        @keyframes glowPulse {
+            from {
+                text-shadow: 0 0 4px rgba(255, 255, 255, 0.2), 
+                             0 0 10px rgba(99, 102, 241, 0.2);
+            }
+            to {
+                text-shadow: 0 0 8px rgba(255, 255, 255, 0.6), 
+                             0 0 20px rgba(99, 102, 241, 0.8),
+                             0 0 30px rgba(236, 72, 153, 0.6);
+            }
+        }
+
+        /* 5. Floating (Sallanma / Uçuş) */
+        .anim-float {
+            animation: floatUpDown 3s ease-in-out infinite;
+        }
+        @keyframes floatUpDown {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* 6. Blur Reveal (Bulanıklıktan Netleşme) */
+        .anim-blur-reveal {
+            opacity: 0;
+            filter: blur(10px);
+            animation: blurReveal 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+        @keyframes blurReveal {
+            from {
+                opacity: 0;
+                filter: blur(10px);
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                filter: blur(0);
+                transform: scale(1);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.5rem;
+            }
+            .animation-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>✨ Paragraf Animasyonları</h1>
+        <p>Projelerinize hayat katacak modern ve estetik CSS animasyon örnekleri</p>
+    </header>
+
+    <div class="container">
+        <main class="animation-grid">
+
+            <!-- Card 1: Fade Up -->
+            <div class="card" id="card-fade-up">
+                <div class="card-header">
+                    <span class="card-title">Aşağıdan Süzülme (Fade Up)</span>
+                    <button class="btn-restart" onclick="restartAnimation('demo-fade-up', 'anim-fade-up')" id="btn-restart-1">
+                        🔄 Yeniden Oynat
+                    </button>
+                </div>
+                <div class="demo-area">
+                    <p id="demo-fade-up" class="demo-text anim-fade-up">
+                        Bu paragraf, sayfa yüklendiğinde aşağıdan yukarıya doğru süzülerek ve şeffaflığı azalarak yumuşakça belirir.
+                    </p>
+                </div>
+                <div class="code-container">
+                    <button class="btn-copy" onclick="copyCode(this, 'code-fade-up')" id="btn-copy-1">Kopyala</button>
+                    <pre class="code-block" id="code-fade-up"><code>/* HTML */
+<p class="fade-up">Bu bir animasyonlu paragraftır.</p>
+
+/* CSS */
+.fade-up {
+  opacity: 0;
+  animation: fadeUp 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}</code></pre>
+                </div>
+            </div>
+
+            <!-- Card 2: Typing Effect -->
+            <div class="card" id="card-typing">
+                <div class="card-header">
+                    <span class="card-title">Daktilo Efekti (Typing)</span>
+                    <button class="btn-restart" onclick="restartAnimation('demo-typing', 'anim-typing')" id="btn-restart-2">
+                        🔄 Yeniden Oynat
+                    </button>
+                </div>
+                <div class="demo-area">
+                    <p id="demo-typing" class="demo-text anim-typing">
+                        Yazı daktiloda yazılıyormuş gibi harf harf belirir.
+                    </p>
+                </div>
+                <div class="code-container">
+                    <button class="btn-copy" onclick="copyCode(this, 'code-typing')" id="btn-copy-2">Kopyala</button>
+                    <pre class="code-block" id="code-typing"><code>/* HTML */
+<p class="typing">Harf harf yazılan metin.</p>
+
+/* CSS */
+.typing {
+  display: inline-block;
+  overflow: hidden;
+  border-right: 3px solid #ec4899;
+  white-space: nowrap;
+  width: 0;
+  animation: 
+    typing 3s steps(30, end) forwards,
+    blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: #ec4899 }
+}</code></pre>
+                </div>
+            </div>
+
+            <!-- Card 3: Gradient Wave -->
+            <div class="card" id="card-gradient">
+                <div class="card-header">
+                    <span class="card-title">Renk Geçişi (Gradient Flow)</span>
+                    <button class="btn-restart" onclick="restartAnimation('demo-gradient', 'anim-gradient')" id="btn-restart-3">
+                        🔄 Yeniden Oynat
+                    </button>
+                </div>
+                <div class="demo-area">
+                    <p id="demo-gradient" class="demo-text anim-gradient">
+                        Canlı ve dinamik gradyan renkleri metin boyunca sürekli dalgalanır.
+                    </p>
+                </div>
+                <div class="code-container">
+                    <button class="btn-copy" onclick="copyCode(this, 'code-gradient')" id="btn-copy-3">Kopyala</button>
+                    <pre class="code-block" id="code-gradient"><code>/* HTML */
+<p class="gradient-text">Renkli dalgalı paragraf.</p>
+
+/* CSS */
+.gradient-text {
+  background: linear-gradient(120deg, #ff007f, #7f00ff, #00f0ff, #ff007f);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientMove 4s ease infinite;
+  font-weight: 600;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50% }
+  50% { background-position: 100% 50% }
+  100% { background-position: 0% 50% }
+}</code></pre>
+                </div>
+            </div>
+
+            <!-- Card 4: Glow Pulse -->
+            <div class="card" id="card-glow">
+                <div class="card-header">
+                    <span class="card-title">Işıma Efekti (Glow Pulse)</span>
+                    <button class="btn-restart" onclick="restartAnimation('demo-glow', 'anim-glow')" id="btn-restart-4">
+                        🔄 Yeniden Oynat
+                    </button>
+                </div>
+                <div class="demo-area">
+                    <p id="demo-glow" class="demo-text anim-glow">
+                        Metnin arkasında neon benzeri parıldayan, yumuşak bir ışık efekti.
+                    </p>
+                </div>
+                <div class="code-container">
+                    <button class="btn-copy" onclick="copyCode(this, 'code-glow')" id="btn-copy-4">Kopyala</button>
+                    <pre class="code-block" id="code-glow"><code>/* HTML */
+<p class="glow-text">Parıldayan neon metin.</p>
+
+/* CSS */
+.glow-text {
+  animation: glowPulse 2s ease-in-out infinite alternate;
+}
+
+@keyframes glowPulse {
+  from {
+    text-shadow: 0 0 4px rgba(255,255,255,0.2), 
+                 0 0 10px rgba(99,102,241,0.2);
+  }
+  to {
+    text-shadow: 0 0 8px rgba(255,255,255,0.6), 
+                 0 0 20px rgba(99,102,241,0.8),
+                 0 0 30px rgba(236,72,153,0.6);
+  }
+}</code></pre>
+                </div>
+            </div>
+
+            <!-- Card 5: Floating -->
+            <div class="card" id="card-float">
+                <div class="card-header">
+                    <span class="card-title">Uçuşan Efekt (Float)</span>
+                    <button class="btn-restart" onclick="restartAnimation('demo-float', 'anim-float')" id="btn-restart-5">
+                        🔄 Yeniden Oynat
+                    </button>
+                </div>
+                <div class="demo-area">
+                    <p id="demo-float" class="demo-text anim-float">
+                        Havada asılı kalmış gibi sürekli aşağı ve yukarı hafifçe yüzen bir paragraf.
+                    </p>
+                </div>
+                <div class="code-container">
+                    <button class="btn-copy" onclick="copyCode(this, 'code-float')" id="btn-copy-5">Kopyala</button>
+                    <pre class="code-block" id="code-float"><code>/* HTML */
+<p class="float-text">Uçan ve sallanan paragraf.</p>
+
+/* CSS */
+.float-text {
+  animation: floatUpDown 3s ease-in-out infinite;
+}
+
+@keyframes floatUpDown {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}</code></pre>
+                </div>
+            </div>
+
+            <!-- Card 6: Blur Reveal -->
+            <div class="card" id="card-blur-reveal">
+                <div class="card-header">
+                    <span class="card-title">Bulanıklıktan Netleşme</span>
+                    <button class="btn-restart" onclick="restartAnimation('demo-blur-reveal', 'anim-blur-reveal')" id="btn-restart-6">
+                        🔄 Yeniden Oynat
+                    </button>
+                </div>
+                <div class="demo-area">
+                    <p id="demo-blur-reveal" class="demo-text anim-blur-reveal">
+                        İlk başta bulanık ve okunamaz olan metin, pürüzsüzce odaklanarak netleşir.
+                    </p>
+                </div>
+                <div class="code-container">
+                    <button class="btn-copy" onclick="copyCode(this, 'code-blur-reveal')" id="btn-copy-6">Kopyala</button>
+                    <pre class="code-block" id="code-blur-reveal"><code>/* HTML */
+<p class="blur-reveal">Bulanıklıktan odağa giren metin.</p>
+
+/* CSS */
+.blur-reveal {
+  opacity: 0;
+  filter: blur(10px);
+  animation: blurReveal 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes blurReveal {
+  from {
+    opacity: 0;
+    filter: blur(10px);
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: scale(1);
+  }
+}</code></pre>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        // Animasyonları Yeniden Başlatma Fonksiyonu
+        function restartAnimation(elementId, className) {
+            const element = document.getElementById(elementId);
+            if (!element) return;
+            
+            // Animasyon sınıfını kaldır, DOM reflow tetikle ve sınıfı tekrar ekle
+            element.classList.remove(className);
+            void element.offsetWidth; // Reflow tetikler
+            element.classList.add(className);
+        }
+
+        // Kodu Kopyalama Fonksiyonu
+        function copyCode(button, codeBlockId) {
+            const codeBlock = document.getElementById(codeBlockId);
+            if (!codeBlock) return;
+
+            const textToCopy = codeBlock.innerText;
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                const originalText = button.innerText;
+                button.innerText = 'Kopyalandı! ✓';
+                button.classList.add('copied');
+                
+                setTimeout(() => {
+                    button.innerText = originalText;
+                    button.classList.remove('copied');
+                }, 2000);
+            }).catch(err => {
+                console.error('Kopyalama hatası: ', err);
+            });
+        }
+    </script>
+</body>
+</html>
